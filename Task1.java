@@ -60,20 +60,9 @@ public class Task1 {
                 toDecoded += String.valueOf(counter) + a;
                 counter =1 ;
                 a = currentLetter;
-            }
-
-            System.out.println(currentLetter);
-            System.out.println(counter);
-            System.out.println(toEncoded.length());
-            
-               if(i == toEncoded.length()-1){
-               System.out.println("sss");
-               toDecoded += String.valueOf(counter) +currentLetter ;
-          
-           }
-               
+            }                
         }
-
+        toDecoded += String.valueOf(counter) + toEncoded.charAt(toEncoded.length()-1); ;
         return toDecoded;
     }
   
