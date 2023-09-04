@@ -2,14 +2,14 @@ package NatureReserveSimulationLogic.Animals;
 import NatureReserveSimulationLogic.Food.Food;
 import java.util.ArrayList;
 
-public class Animal{
+public abstract class Animal{
 
-    private int currentEnergy;
-    private int maximumEnergy;
-    private Diet diet;
-    private Species specie;
+    protected int currentEnergy;
+    protected int maximumEnergy;
+    protected ArrayList<Food> diet;
+    protected Species specie;
     
-    public Animal(int maximumEnergy,Diet diet, Species specie){
+    public Animal(int maximumEnergy, Species specie, ArrayList<Food> diet){
         
         this.maximumEnergy = maximumEnergy;
         this.currentEnergy = maximumEnergy;
@@ -27,7 +27,8 @@ public class Animal{
     
     public boolean isInTheDied(Food food){
             
-            ArrayList<Food> foods = this.diet.getFoods();
+            ArrayList<Food> foods;
+            foods = this.diet;
             
             for(Food f : foods){
                 
@@ -37,18 +38,14 @@ public class Animal{
             
             return false;
         }
-    
-    public boolean isDied(){
-        if(currentEnergy == 0)
-            return true; 
-        
-        return false;
+
+    public int getCurrentEnergy() {
+        return currentEnergy;
     }
 
     @Override
     public String toString() {
         return ("His species it's "+this.specie+" and his current energy it's: "+this.currentEnergy);
     }
-    
-    
+       
 }
