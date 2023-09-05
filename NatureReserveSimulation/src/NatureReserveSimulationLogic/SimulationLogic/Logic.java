@@ -82,13 +82,20 @@ public class Logic {
         for(int i=0; i<nAnimal; i++){
             
             ArrayList<Food> dietCat = new ArrayList<Food>();
-            Cat cat = new Cat(2, Species.CAT);
+            Cat cat = new Cat(5, Species.CAT);
             animals.add(cat);
-            
-            
+               
             ArrayList<Food> dietCow = new ArrayList<Food>();
-            Cow cow = new Cow(3, Species.COW);
+            Cow cow = new Cow(8, Species.COW);
             animals.add(cow);
+            
+            ArrayList<Food> dietDog = new ArrayList<Food>();
+            Dog dog = new Dog(6, Species.DOG);
+            animals.add(dog);
+               
+            ArrayList<Food> dietLion = new ArrayList<Food>();
+            Lion lion = new Lion(10, Species.LION);
+            animals.add(lion);
         }
         return animals;
     }   

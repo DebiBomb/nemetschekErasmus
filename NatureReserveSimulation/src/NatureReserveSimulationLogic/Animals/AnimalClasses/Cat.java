@@ -2,9 +2,6 @@ package NatureReserveSimulationLogic.Animals.AnimalClasses;
 
 import NatureReserveSimulationLogic.Animals.Animal;
 import NatureReserveSimulationLogic.Animals.Species;
-import NatureReserveSimulationLogic.Food.Food;
-import NatureReserveSimulationLogic.Food.FoodClasses.Apple;
-import java.util.ArrayList;
 
 public class Cat extends Animal{
     

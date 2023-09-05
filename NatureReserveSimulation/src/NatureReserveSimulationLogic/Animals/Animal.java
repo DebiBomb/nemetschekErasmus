@@ -56,11 +56,11 @@ public abstract class Animal{
     }
 
     public boolean isAlive() {
-        if(!(this.currentEnergy == 0))
+        if(this.currentEnergy > 0)
             return true;
-        else{
-        alive = false;
-        return false;
+        else{  
+            alive = false;
+            return false;
         }
     }
 
