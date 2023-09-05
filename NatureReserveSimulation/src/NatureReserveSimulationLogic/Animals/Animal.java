@@ -32,12 +32,15 @@ public abstract class Animal{
     public void Feeding(Food food){
         
         if ((isInTheDiet(food))){
-            if(this.currentEnergy != this.maximumEnergy){
-            System.out.println("Hi i'm: " + this.specie + " and i eat this: " + food.getName());
-            currentEnergy ++;
+            if(this.currentEnergy < this.maximumEnergy){
+                System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet");
+                currentEnergy ++;
+            }else if(this.currentEnergy == this.maximumEnergy){
+                System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
             }
-        }else{
-            currentEnergy --; 
+            }else{
+                System.out.println(this.specie + " have eat: " + food.getName() + ", it's NOT in his diet");
+                currentEnergy --; 
         }
     }  
     
@@ -56,9 +59,9 @@ public abstract class Animal{
     }
 
     public boolean isAlive() {
-        if(this.currentEnergy > 0)
+        if(this.currentEnergy > 0){ 
             return true;
-        else{  
+        }else{  
             alive = false;
             return false;
         }
@@ -68,6 +71,10 @@ public abstract class Animal{
         return lifespan;
     }
 
+    public Species getSpecie() {
+        return specie;
+    }
+    
     @Override
     public String toString() {
         return ("His species it's "+this.specie+" and his current energy it's: "+this.currentEnergy);
