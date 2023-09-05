@@ -7,7 +7,11 @@ import java.util.ArrayList;
 
 public class Lion extends Animal{
     
-    public Lion(int maximumEnergy, Species specie, ArrayList<Food> diet) {
-        super(maximumEnergy, specie, diet);
+    protected ArrayList<String> diet = new ArrayList<String>();
+    
+    public Lion(int maximumEnergy, Species specie) {
+        super(maximumEnergy, specie);
+        this.diet.add("potato");
+        this.diet.add("strawberry");
     }
 }

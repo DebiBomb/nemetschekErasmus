@@ -2,9 +2,10 @@ package NatureReserveSimulationLogic.Statistics;
 
 public class Statistics {
     
-    private int min, max, averange;
+    protected int min, max;
+    protected double averange;
     
-    public Statistics(int min, int max, int averange){
+    public Statistics(int min, int max, double averange){
         
         this.min = min;
         this.max = max;
@@ -19,7 +20,7 @@ public class Statistics {
         return max;
     }
 
-    public int getAverange() {
+    public double getAverange() {
         return averange;
     }
 

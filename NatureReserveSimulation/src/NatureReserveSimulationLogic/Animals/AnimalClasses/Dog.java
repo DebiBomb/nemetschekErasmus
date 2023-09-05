@@ -7,8 +7,12 @@ import NatureReserveSimulationLogic.Animals.Species;
 
 public class Dog extends Animal{
     
-    public Dog(int maximumEnergy, Species specie,  ArrayList<Food> diet) {   
-        super(maximumEnergy, specie, diet);
+    protected ArrayList<String> diet = new ArrayList<String>();
+    
+    public Dog(int maximumEnergy, Species specie) {   
+        super(maximumEnergy, specie);
+        this.diet.add("apple");
+        this.diet.add("banana");
     }
      
 }

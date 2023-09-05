@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 public class Cow extends Animal{
         
-    public Cow(int maximumEnergy, Species specie, ArrayList<Food> diet) {
-        super(maximumEnergy, specie, diet);
+    public Cow(int maximumEnergy, Species specie) {
+        super(maximumEnergy, specie);
+        this.addToDiet("grass");
+        this.addToDiet("leaf");
 
     }        
 

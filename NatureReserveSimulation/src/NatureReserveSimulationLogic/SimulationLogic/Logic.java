@@ -9,42 +9,70 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Logic {
-     
-    private int nAnimal;
     
-    public Statistics startSimulation(int nAnimal){
-        int nMin = 0, nMax = 0, nAverange = 0;
-        int isAllDied = 0;
-        boolean firstDied = false;
-        ArrayList<Animal> animals = generateAnimal(nAnimal);
-        
-        while(isAllDied <= nAnimal){
-            
-            for(Animal animal : animals){
-                
+    private ArrayList<Animal> animals;
+    
+    public Logic() {
+        animals = new ArrayList<>();
+    }
+ 
+    public void startSimulation(int nAnimal) {
+        animals = generateAnimal(nAnimal);
+
+        // Simulate the game until all animals are dead
+        while (!allAnimalsDead()) {
+            for (Animal animal : animals) {
                 animal.Feeding(generateRandomFood());
-                
-                if(!firstDied){
-                    nMin ++;
-                    nMax ++;
-                }else{
-                    nMax ++;
-                }                           
-                      
-                if(isDied(animal) && !firstDied){                    
-                    isAllDied ++;
-                    firstDied = true;
-                    nAverange+=(nMax/nAnimal);
-                }else if(isDied(animal)){
-                    isAllDied ++;
-                    nAverange+=(nMax/nAnimal);
-                }
-            }         
+                animal.simulateTurn();
+            }
         }
-        
-        Statistics statistics = new Statistics((nMin / nAnimal),(nMax / nAnimal),((nAverange / nAnimal) / nAnimal));
-        
-        return statistics;
+
+        // Calculate statistics
+        int nMin = calculateMinLifespan();
+        int nMax = calculateMaxLifespan();
+        double nAverage = calculateAverageLifespan();
+
+        Statistics statistics = new Statistics(nMin, nMax, nAverage);
+        System.out.println("Statistics: " + statistics);
+    }
+    
+    private boolean allAnimalsDead() {
+        for (Animal animal : animals) {
+            if (animal.isAlive()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private int calculateMinLifespan() {
+        int minLifespan = Integer.MAX_VALUE;
+        for (Animal animal : animals) {
+            int lifespan = animal.getLifespan();
+            if (lifespan < minLifespan) {
+                minLifespan = lifespan;
+            }
+        }
+        return minLifespan;
+    }
+
+    private int calculateMaxLifespan() {
+        int maxLifespan = 0;
+        for (Animal animal : animals) {
+            int lifespan = animal.getLifespan();
+            if (lifespan > maxLifespan) {
+                maxLifespan = lifespan;
+            }
+        }
+        return maxLifespan;
+    }
+
+    private double calculateAverageLifespan() {
+        int totalLifespan = 0;
+        for (Animal animal : animals) {
+            totalLifespan += animal.getLifespan();
+        }
+        return (double) totalLifespan / animals.size();
     }
     
     public ArrayList<Animal> generateAnimal(int nAnimal){
@@ -54,15 +82,12 @@ public class Logic {
         for(int i=0; i<nAnimal; i++){
             
             ArrayList<Food> dietCat = new ArrayList<Food>();
-            Apple apple = new Apple();
-            dietCat.add(apple);
-            Cat cat = new Cat(3, Species.CAT, dietCat);
+            Cat cat = new Cat(2, Species.CAT);
             animals.add(cat);
             
+            
             ArrayList<Food> dietCow = new ArrayList<Food>();
-            Grass grass = new Grass();
-            dietCow.add(grass);
-            Cow cow = new Cow(3, Species.COW, dietCow);
+            Cow cow = new Cow(3, Species.COW);
             animals.add(cow);
         }
         return animals;
@@ -80,41 +105,27 @@ public class Logic {
         Strawberry strawberry = new Strawberry();
         
         Random r = new Random();
-        int nRandom = (int)Math.floor(Math.random() * (8 - 0 + 1) + 0);
+        int nRandom = (int)Math.floor(Math.random() * (7 - 0 + 1) + 0);
         switch (nRandom) {
             case 0:
-                System.out.println("mela");
               return apple;
             case 1:
-                System.out.println("banana");
               return banana;
             case 2:
-                System.out.println("erba");
               return grass;
             case 3:
-                System.out.println("foglia");
               return leaf;
             case 4:
-                System.out.println("carne");
               return meat;
             case 5:
-                System.out.println("maiale");
               return pork;
             case 6:
-                System.out.println("patata");
               return potato;
             case 7:
-                System.out.println("fragola");
               return strawberry;
         }
         
-        return apple;
+        return null;
     }
     
-    public boolean isDied(Animal animal){
-        if(animal.getCurrentEnergy() == 0)
-            return true; 
-        
-        return false;
-    }  
 }

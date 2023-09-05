@@ -4,4 +4,13 @@ import NatureReserveSimulationLogic.Food.Food;
 
 public class Strawberry extends Food{
     
+    public Strawberry() {
+        this.name = "strawberry";
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    
 }
