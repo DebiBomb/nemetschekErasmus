@@ -19,10 +19,14 @@ public abstract class Animal{
     
     public void Feeding(Food food){
         
-        if (isInTheDied(food) && currentEnergy != maximumEnergy)
+        if ((isInTheDied(food)) && (currentEnergy != maximumEnergy)){
+            System.out.println("Hi i'm: " + this.specie + " and i eat this: " + food);
             currentEnergy ++;
-        
-        currentEnergy --;   
+        }else if(isInTheDied(food)){   
+            
+        }else{
+            currentEnergy --; 
+        }
     }  
     
     public boolean isInTheDied(Food food){

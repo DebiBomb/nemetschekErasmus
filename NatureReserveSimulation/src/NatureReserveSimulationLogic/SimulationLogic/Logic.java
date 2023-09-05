@@ -34,15 +34,15 @@ public class Logic {
                 if(isDied(animal) && !firstDied){                    
                     isAllDied ++;
                     firstDied = true;
-                    nAverange+=nMax;
+                    nAverange+=(nMax/nAnimal);
                 }else if(isDied(animal)){
                     isAllDied ++;
-                    nAverange+=nMax;
+                    nAverange+=(nMax/nAnimal);
                 }
             }         
         }
         
-        Statistics statistics = new Statistics((nMin / nAnimal),(nMax / nAnimal),(nAverange / nAnimal));
+        Statistics statistics = new Statistics((nMin / nAnimal),(nMax / nAnimal),((nAverange / nAnimal) / nAnimal));
         
         return statistics;
     }
@@ -51,7 +51,7 @@ public class Logic {
         
         ArrayList<Animal> animals = new ArrayList<Animal>();
         
-        for(int i=0; i<=nAnimal; i++){
+        for(int i=0; i<nAnimal; i++){
             
             ArrayList<Food> dietCat = new ArrayList<Food>();
             Apple apple = new Apple();
@@ -83,20 +83,28 @@ public class Logic {
         int nRandom = (int)Math.floor(Math.random() * (8 - 0 + 1) + 0);
         switch (nRandom) {
             case 0:
+                System.out.println("mela");
               return apple;
             case 1:
+                System.out.println("banana");
               return banana;
             case 2:
+                System.out.println("erba");
               return grass;
             case 3:
+                System.out.println("foglia");
               return leaf;
             case 4:
+                System.out.println("carne");
               return meat;
             case 5:
+                System.out.println("maiale");
               return pork;
             case 6:
+                System.out.println("patata");
               return potato;
             case 7:
+                System.out.println("fragola");
               return strawberry;
         }
         
