@@ -29,8 +29,8 @@ public class Logic {
             for (Animal animal : animals) {
                 animal.growChanges();
                 if (animal.isAlive()) {
+                    animal.increaseLifespan();
                     animal.Feeding(generateRandomFood());
-                    animal.simulateTurn();
                     if (!animal.isAlive()) {
                         System.out.println(animal.getSpecie()+ " died ");
                     }

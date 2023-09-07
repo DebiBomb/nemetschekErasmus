@@ -50,27 +50,23 @@ public abstract class Animal{
     public abstract void growChanges();
     
     public boolean isInTheDiet(Food food) {
-        ArrayList<String> foods = this.diet;
-
-        return foods.contains(food.getName());
+        return this.diet.contains(food.getName());
     }   
     
     public int getCurrentEnergy() {
         return currentEnergy;
     }
     
-    public void simulateTurn() {
-        if (isAlive())
+    public void increaseLifespan() {
             lifespan++;
     }
 
     public boolean isAlive() {
-        if(this.currentEnergy > 0 && alive == true){ 
-            return true;
-        }else{  
+        if(currentEnergy < 0){
             alive = false;
             return false;
         }
+        return true;
     }
 
     public int getLifespan() {
