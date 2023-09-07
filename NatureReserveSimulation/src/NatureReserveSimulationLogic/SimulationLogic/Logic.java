@@ -22,11 +22,12 @@ public class Logic {
         animals = generateAnimal(nAnimal);
 
         // Simulate the game until all animals are dead
-        while (!allAnimalsDead()) {
+        while (!allAnimalsDead() && currentTurn < 100) {
             currentTurn++;
             System.out.println("Turn---------------------------" + currentTurn);
             
             for (Animal animal : animals) {
+                animal.growChanges();
                 if (animal.isAlive()) {
                     animal.Feeding(generateRandomFood());
                     animal.simulateTurn();
@@ -120,9 +121,11 @@ public class Logic {
         Pork pork = new Pork();
         Potato potato = new Potato();
         Strawberry strawberry = new Strawberry();
+        Bird bird = new Bird();
+        Buffalo buffalo = new Buffalo();
         
         Random r = new Random();
-        int nRandom = (int)Math.floor(Math.random() * (7 - 0 + 1) + 0);
+        int nRandom = (int)Math.floor(Math.random() * (9 - 0 + 1) + 0);
         switch (nRandom) {
             case 0:
               return apple;
@@ -140,7 +143,11 @@ public class Logic {
               return potato;
             case 7:
               return strawberry;
+            case 8:
+              return bird;
+            case 9:
+              return buffalo;
         }      
         return null;
-    }    
+    } 
 }

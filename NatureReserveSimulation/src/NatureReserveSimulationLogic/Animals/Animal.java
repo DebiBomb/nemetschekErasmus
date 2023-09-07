@@ -17,7 +17,7 @@ public abstract class Animal{
         this.currentEnergy = maximumEnergy;
         this.specie = specie;
         this.diet = new ArrayList<>();
-        this.lifespan = 0;
+        this.lifespan = lifespan;
         this.alive = true;
     }
     
@@ -40,15 +40,21 @@ public abstract class Animal{
             }
             }else{
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's NOT in his diet");
+                starvingSound();
                 currentEnergy --; 
         }
     }  
+    
+    public abstract void starvingSound();
+    
+    public abstract void growChanges();
     
     public boolean isInTheDiet(Food food) {
         ArrayList<String> foods = this.diet;
 
         return foods.contains(food.getName());
-}
+    }   
+    
     public int getCurrentEnergy() {
         return currentEnergy;
     }
@@ -59,7 +65,7 @@ public abstract class Animal{
     }
 
     public boolean isAlive() {
-        if(this.currentEnergy > 0){ 
+        if(this.currentEnergy > 0 && alive == true){ 
             return true;
         }else{  
             alive = false;
