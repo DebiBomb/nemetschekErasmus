@@ -6,7 +6,7 @@ public abstract class Animal{
 
     protected int currentEnergy;
     protected int maximumEnergy;
-    protected ArrayList<String> diet;
+    private ArrayList<String> diet;
     protected Species specie;
     protected int lifespan;
     protected boolean alive;
@@ -17,8 +17,8 @@ public abstract class Animal{
         this.currentEnergy = maximumEnergy;
         this.specie = specie;
         this.diet = new ArrayList<>();
-        this.lifespan = lifespan;
-        this.alive = true;
+        this.lifespan = 0;
+        this.alive = true; 
     }
     
     public void addToDiet(String foodItem) {

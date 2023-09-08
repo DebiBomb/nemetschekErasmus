@@ -13,15 +13,13 @@ public class Logic {
     protected ArrayList<Animal> animals;
     protected int currentTurn;
     
-    public Logic() {
-        animals = new ArrayList<>();
+    public Logic(ArrayList<Animal> animals) {
+        this.animals = animals;
         currentTurn = 0;
     }
  
-    public void startSimulation(int nAnimal) {
-        animals = generateAnimal(nAnimal);
-
-        // Simulate the game until all animals are dead
+    public void startSimulation() {
+        
         while (!allAnimalsDead() && currentTurn < 100) {
             currentTurn++;
             System.out.println("Turn---------------------------" + currentTurn);
@@ -90,27 +88,7 @@ public class Logic {
         }
         realTotalLifespan = totalLifespan / animals.size();
         return averangeLifespanPlusAnimal = (Integer.toString(realTotalLifespan));
-    }
-    
-    public ArrayList<Animal> generateAnimal(int nAnimal){
-        
-        ArrayList<Animal> animals = new ArrayList<Animal>();
-        
-        for(int i=0; i<nAnimal; i++){
-            Cat cat = new Cat(5, Species.CAT);
-            animals.add(cat);
-               
-            Cow cow = new Cow(8, Species.COW);
-            animals.add(cow);
-            
-            Dog dog = new Dog(6, Species.DOG);
-            animals.add(dog);
-            
-            Lion lion = new Lion(10, Species.LION);
-            animals.add(lion);
-        }
-        return animals;
-    }   
+    }  
     
     public Food generateRandomFood(){    
         Apple apple = new Apple();
