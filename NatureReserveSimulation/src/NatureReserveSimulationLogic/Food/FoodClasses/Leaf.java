@@ -6,6 +6,7 @@ public class Leaf extends Food{
     
     public Leaf() {
         this.name = "leaf";
+        this.nutritionalValue = 1;
     }
 
     public String getName() {

@@ -20,6 +20,8 @@ public class Logic {
  
     public void startSimulation() {
         
+        Food food = new Food();
+        
         while (!allAnimalsDead() && currentTurn < 100) {
             currentTurn++;
             System.out.println("Turn---------------------------" + currentTurn);
@@ -28,7 +30,9 @@ public class Logic {
                 animal.growChanges();
                 if (animal.isAlive()) {
                     animal.increaseLifespan();
-                    animal.Feeding(generateRandomFood());
+                    food = generateRandomFood();
+                    animal.Feeding(food);
+                    isAnotherAnimal(food, animal);
                     if (!animal.isAlive()) {
                         System.out.println(animal.getSpecie()+ " died ");
                     }
@@ -101,9 +105,13 @@ public class Logic {
         Strawberry strawberry = new Strawberry();
         Bird bird = new Bird();
         Buffalo buffalo = new Buffalo();
-        
+        Cat cat = new Cat(Species.CAT);
+        Cow cow = new Cow(Species.COW);
+        Dog dog = new Dog(Species.DOG);
+        Lion lion = new Lion(Species.LION);
+                
         Random r = new Random();
-        int nRandom = (int)Math.floor(Math.random() * (9 - 0 + 1) + 0);
+        int nRandom = (int)Math.floor(Math.random() * (13 - 0 + 1) + 0);
         switch (nRandom) {
             case 0:
               return apple;
@@ -125,7 +133,29 @@ public class Logic {
               return bird;
             case 9:
               return buffalo;
+            case 10:
+              return cat;
+            case 11:
+              return cow;
+            case 12:
+              return dog;
+            case 13:
+              return lion;
         }      
         return null;
     } 
+    
+        public void isAnotherAnimal(Food food, Animal animal){      
+        
+            for(int i=0; i<animals.size(); i++){
+                
+                if(animal.isInTheDiet(food)){
+                    if(food.equals(animals.get(i))){
+                        animals.get(i).setCurrentEnergy(0);
+                        System.out.println(animals.get(i).getSpecie() + " was eated");
+                    }
+                }
+            }
+    }
+  
 }

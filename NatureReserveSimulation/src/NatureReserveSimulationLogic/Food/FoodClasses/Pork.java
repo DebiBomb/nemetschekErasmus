@@ -6,6 +6,7 @@ public class Pork extends Food{
     
     public Pork() {
         this.name = "pork";
+        this.nutritionalValue = 4;
     }
 
     public String getName() {

@@ -6,7 +6,7 @@ public class Buffalo extends Food{
     
     public Buffalo() {
         this.name = "buffalo";
-        
+        this.nutritionalValue = 5;
     }
 
     public String getName() {

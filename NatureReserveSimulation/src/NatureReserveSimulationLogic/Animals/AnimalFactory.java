@@ -14,19 +14,19 @@ public class AnimalFactory {
         this.animalNames = animalNames;
     }
     
-    private Animal createAnimal(String name){
+    public Animal createAnimal(String name){
         switch (name) {
             case "cat":
-                Cat cat = new Cat(5, Species.CAT);
+                Cat cat = new Cat(Species.CAT);
               return cat;
             case "cow":
-                Cow cow = new Cow(8, Species.COW);
+                Cow cow = new Cow(Species.COW);
               return cow;
             case "dog":
-                Dog dog = new Dog(6, Species.DOG);
+                Dog dog = new Dog(Species.DOG);
               return dog;
             case "lion":
-                Lion lion = new Lion(10, Species.LION);
+                Lion lion = new Lion(Species.LION);
               return lion;
         }
         return null;
@@ -41,5 +41,7 @@ public class AnimalFactory {
             }
         return animals;
     }
+    
+    
     
 }        

@@ -2,7 +2,7 @@ package NatureReserveSimulationLogic.Animals;
 import NatureReserveSimulationLogic.Food.Food;
 import java.util.ArrayList;
 
-public abstract class Animal{
+public abstract class Animal extends Food{
 
     protected int currentEnergy;
     protected int maximumEnergy;
@@ -11,9 +11,7 @@ public abstract class Animal{
     protected int lifespan;
     protected boolean alive;
     
-    public Animal(int maximumEnergy, Species specie){
-        
-        this.maximumEnergy = maximumEnergy;
+    public Animal(Species specie){
         this.currentEnergy = maximumEnergy;
         this.specie = specie;
         this.diet = new ArrayList<>();
@@ -31,17 +29,17 @@ public abstract class Animal{
     
     public void Feeding(Food food){
         
-        if ((isInTheDiet(food))){
-            if(this.currentEnergy < this.maximumEnergy){
+         if ((isInTheDiet(food))){
+            if((this.currentEnergy + food.getNutritionalValue()) <= this.maximumEnergy){
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet");
-                currentEnergy ++;
+                currentEnergy += food.getNutritionalValue();
             }else if(this.currentEnergy == this.maximumEnergy){
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
             }
             }else{
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's NOT in his diet");
                 starvingSound();
-                currentEnergy --; 
+                currentEnergy -= food.getNutritionalValue(); 
         }
     }  
     
@@ -51,7 +49,8 @@ public abstract class Animal{
     
     public boolean isInTheDiet(Food food) {
         return this.diet.contains(food.getName());
-    }   
+    }
+    
     
     public int getCurrentEnergy() {
         return currentEnergy;
@@ -60,6 +59,7 @@ public abstract class Animal{
     public void increaseLifespan() {
             lifespan++;
     }
+     
 
     public boolean isAlive() {
         if(currentEnergy < 0){
@@ -76,6 +76,12 @@ public abstract class Animal{
     public Species getSpecie() {
         return specie;
     }
+
+    public void setCurrentEnergy(int currentEnergy) {
+        this.currentEnergy = currentEnergy;
+    }
+    
+    
     
     @Override
     public String toString() {

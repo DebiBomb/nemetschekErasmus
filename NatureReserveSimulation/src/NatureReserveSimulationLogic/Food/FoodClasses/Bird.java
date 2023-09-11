@@ -6,7 +6,7 @@ public class Bird extends Food{
     
     public Bird() {
         this.name = "bird";
-        
+        this.nutritionalValue = 3;
     }
 
     public String getName() {
