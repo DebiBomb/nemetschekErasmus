@@ -12,6 +12,9 @@ public class Cow extends Animal{
         this.currentEnergy = maximumEnergy;
         this.addToDiet("grass");
         this.addToDiet("leaf");
+        this.addToDiet("creepers");
+        this.addToDiet("shrubs");
+        this.addToDiet("potato");
         this.nutritionalValue = 5;
 
     }        

@@ -11,7 +11,10 @@ public class Cat extends Animal{
         this.maximumEnergy = 10;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("bird");
-        this.addToDiet("grass");  
+        this.addToDiet("grass"); 
+        this.addToDiet("climbers");
+        this.addToDiet("trees");
+        this.addToDiet("herbs");
         this.nutritionalValue = 3;
     }  
 

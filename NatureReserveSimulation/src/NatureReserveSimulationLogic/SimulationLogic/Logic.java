@@ -1,20 +1,22 @@
 package NatureReserveSimulationLogic.SimulationLogic;
 import NatureReserveSimulationLogic.Animals.Animal;
-import NatureReserveSimulationLogic.Animals.AnimalClasses.*;
-import NatureReserveSimulationLogic.Animals.Species;
-import NatureReserveSimulationLogic.Food.FoodClasses.*;
 import NatureReserveSimulationLogic.Food.Food;
 import NatureReserveSimulationLogic.Statistics.Statistics;
+import NatureReserveSimulationLogic.Plants.Plant;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Logic {
     
     protected ArrayList<Animal> animals;
+    protected ArrayList<Plant> plants;
+    protected ArrayList<Food> foods;
     protected int currentTurn;
     
-    public Logic(ArrayList<Animal> animals) {
+    public Logic(ArrayList<Animal> animals, ArrayList<Plant> plants, ArrayList<Food> foods) {
         this.animals = animals;
+        this.plants = plants;
+        this.foods = foods;
         currentTurn = 0;
     }
  
@@ -22,22 +24,25 @@ public class Logic {
         
         Food food = new Food();
         
-        while (!allAnimalsDead() && currentTurn < 100) {
-            currentTurn++;
+        while (!allAnimalIsDead() && currentTurn < 100) {
             System.out.println("Turn---------------------------" + currentTurn);
+            currentTurn++;
+            allPlantsRegenNutrional();
             
             for (Animal animal : animals) {
-                animal.growChanges();
-                if (animal.isAlive()) {
+                
+                animal.growChanges();             
+                food = takeRandomFoodExpandedVersion();
+                
+                if (animal.isAlive()){
                     animal.increaseLifespan();
-                    food = generateRandomFood();
-                    animal.Feeding(food);
-                    isAnotherAnimal(food, animal);
-                    if (!animal.isAlive()) {
-                        System.out.println(animal.getSpecie()+ " died ");
-                    }
+                    animal.Feeding(food); 
+                    whatHappensToTheFood(food, animal);                   
+                }else{
+                    System.out.println(animal.getName() + " vital functions stopped");
                 }
-            }
+                       
+           }
         }
 
         // Calculate statistics
@@ -49,13 +54,18 @@ public class Logic {
         System.out.println("\nSTATISTICS:\n" + statistics);
     }
     
-    private boolean allAnimalsDead() {
+    private boolean allAnimalIsDead() {
         for (Animal animal : animals) {
-            if (animal.isAlive()) {
+            if (animal.isAlive())
                 return false;
-            }
         }
         return true;
+    }
+    
+    private void allPlantsRegenNutrional(){
+        for(Plant plant : plants){
+            plant.regenNutrient();
+        }
     }
     
     private String calculateMinLifespan() {
@@ -92,70 +102,51 @@ public class Logic {
         }
         realTotalLifespan = totalLifespan / animals.size();
         return averangeLifespanPlusAnimal = (Integer.toString(realTotalLifespan));
-    }  
+    }
     
-    public Food generateRandomFood(){    
-        Apple apple = new Apple();
-        Banana banana = new Banana();
-        Grass grass = new Grass();
-        Leaf leaf = new Leaf();
-        Meat meat = new Meat();
-        Pork pork = new Pork();
-        Potato potato = new Potato();
-        Strawberry strawberry = new Strawberry();
-        Bird bird = new Bird();
-        Buffalo buffalo = new Buffalo();
-        Cat cat = new Cat(Species.CAT);
-        Cow cow = new Cow(Species.COW);
-        Dog dog = new Dog(Species.DOG);
-        Lion lion = new Lion(Species.LION);
-                
+    public Food takeRandomFoodExpandedVersion(){
         Random r = new Random();
-        int nRandom = (int)Math.floor(Math.random() * (13 - 0 + 1) + 0);
-        switch (nRandom) {
+        int RandomIndex = r.nextInt(3);
+        
+        switch (RandomIndex) {
             case 0:
-              return apple;
+                return takeRandomFood();
             case 1:
-              return banana;
+                return takeRandomAnimal();
             case 2:
-              return grass;
-            case 3:
-              return leaf;
-            case 4:
-              return meat;
-            case 5:
-              return pork;
-            case 6:
-              return potato;
-            case 7:
-              return strawberry;
-            case 8:
-              return bird;
-            case 9:
-              return buffalo;
-            case 10:
-              return cat;
-            case 11:
-              return cow;
-            case 12:
-              return dog;
-            case 13:
-              return lion;
-        }      
+                return takeRandomPlant();
+        }
         return null;
+    }
+    
+    public Food takeRandomFood(){    
+        Random r = new Random();
+        int RandomIndex = r.nextInt(foods.size());
+        return foods.get(RandomIndex);
     } 
     
-        public void isAnotherAnimal(Food food, Animal animal){      
-        
-            for(int i=0; i<animals.size(); i++){
-                
-                if(animal.isInTheDiet(food)){
-                    if(food.equals(animals.get(i))){
-                        animals.get(i).setCurrentEnergy(0);
-                        System.out.println(animals.get(i).getSpecie() + " was eated");
-                    }
-                }
-            }
+    public Animal takeRandomAnimal(){
+        Random r = new Random();
+        int RandomIndex = r.nextInt(animals.size());
+        return animals.get(RandomIndex);
     }
-  
+    
+    public Plant takeRandomPlant(){
+        Random r = new Random();
+        int RandomIndex = r.nextInt(plants.size());
+        return plants.get(RandomIndex);
+    }
+    
+    public void whatHappensToTheFood(Food food, Animal animal){
+        if(animals.contains(food) && animal.isInTheDiet(food)){ 
+            System.out.println(food.getName() + " unfortunately he passed away");            
+            animals.remove(food);
+        }else if(plants.contains(food) && animal.isInTheDiet(food)){
+            System.out.println(food.getName() + " has been eated, but some roots remain");
+            food.setNutritionalValue(0);
+        }else if(animal.isInTheDiet(food)){
+            System.out.println(food.getName() + " has been eated");
+            foods.remove(food);
+        }
+    }
 }

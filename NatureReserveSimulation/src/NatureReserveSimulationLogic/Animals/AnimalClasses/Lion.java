@@ -10,9 +10,11 @@ public class Lion extends Animal{
         this.name = "lion";
         this.maximumEnergy = 18;
         this.currentEnergy = maximumEnergy;
-        this.addToDiet("lion");
+        this.addToDiet("cow");
         this.addToDiet("meat");
         this.addToDiet("pork");
+        this.addToDiet("shrubs");
+        this.addToDiet("Creepers");
         this.nutritionalValue = 4;
     }
 

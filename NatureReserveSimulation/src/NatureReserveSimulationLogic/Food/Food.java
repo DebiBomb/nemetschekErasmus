@@ -9,6 +9,12 @@ public class Food {
         return name;
     }
 
+    public void setNutritionalValue(int nutritionalValue) {
+        this.nutritionalValue = nutritionalValue;
+    }
+
+    
+    
     public int getNutritionalValue() {
         return nutritionalValue;
     }   

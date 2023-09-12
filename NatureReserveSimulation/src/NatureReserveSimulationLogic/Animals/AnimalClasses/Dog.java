@@ -13,6 +13,8 @@ public class Dog extends Animal{
         this.addToDiet("cat");
         this.addToDiet("potato");
         this.addToDiet("apple");
+        this.addToDiet("herbs");
+        this.addToDiet("trees");
         this.nutritionalValue = 4;
     }
 

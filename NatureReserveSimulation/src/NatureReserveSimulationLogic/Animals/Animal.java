@@ -16,7 +16,6 @@ public abstract class Animal extends Food{
         this.specie = specie;
         this.diet = new ArrayList<>();
         this.lifespan = 0;
-        this.alive = true; 
     }
     
     public void addToDiet(String foodItem) {
@@ -29,14 +28,13 @@ public abstract class Animal extends Food{
     
     public void Feeding(Food food){
         
-         if ((isInTheDiet(food))){
+        if ((isInTheDiet(food))){
             if((this.currentEnergy + food.getNutritionalValue()) <= this.maximumEnergy){
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet");
                 currentEnergy += food.getNutritionalValue();
-            }else if(this.currentEnergy == this.maximumEnergy){
-                System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
             }
-            }else{
+            System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
+        }else{
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's NOT in his diet");
                 starvingSound();
                 currentEnergy -= food.getNutritionalValue(); 
@@ -62,11 +60,7 @@ public abstract class Animal extends Food{
      
 
     public boolean isAlive() {
-        if(currentEnergy < 0){
-            alive = false;
-            return false;
-        }
-        return true;
+        return currentEnergy >= 0;
     }
 
     public int getLifespan() {
