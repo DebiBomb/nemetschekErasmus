@@ -8,7 +8,7 @@ public class Dog extends Animal{
     public Dog(Species specie) {   
         super(specie);
         this.name = "dog";
-        this.maximumEnergy = 12;
+        this.maximumEnergy = 9999;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("cat");
         this.addToDiet("potato");
@@ -35,6 +35,13 @@ public class Dog extends Animal{
             case 30:
               this.addToDiet("meat");
         }     
+    }
+    
+    @Override
+    public void getEated(int howMuchEat){
+            
+        alive = false;
+        currentEnergy -= howMuchEat;
     }
      
 }

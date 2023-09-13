@@ -23,5 +23,11 @@ public class Creepers extends Plant{
         }    
     }
     
+    @Override
+    public void getEated(int howMuchEat) {
+        
+        nutritionalValue -= howMuchEat;
+    }
+    
 }
     

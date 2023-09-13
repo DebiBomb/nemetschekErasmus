@@ -12,5 +12,9 @@ public class Apple extends Food{
     public String getName() {
         return name;
     }
+
+    @Override
+    public void getEated(int howMuchEat) {     
+    }
     
 }

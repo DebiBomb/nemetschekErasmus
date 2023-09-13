@@ -23,4 +23,10 @@ public class Herbs extends Plant{
         }    
     }
     
+    @Override
+    public void getEated(int howMuchEat) {
+        
+        nutritionalValue -= howMuchEat;
+    }
+    
 }

@@ -12,6 +12,10 @@ public class Grass extends Food{
     public String getName() {
         return name;
     }
+
+    @Override
+    public void getEated(int howMuchEat) {     
+    }
     
     
     

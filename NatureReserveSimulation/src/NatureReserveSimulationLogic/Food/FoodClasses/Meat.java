@@ -12,6 +12,10 @@ public class Meat extends Food{
     public String getName() {
         return name;
     }
+
+    @Override
+    public void getEated(int howMuchEat) {     
+    }
     
     
     

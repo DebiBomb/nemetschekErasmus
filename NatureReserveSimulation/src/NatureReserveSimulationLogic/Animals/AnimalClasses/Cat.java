@@ -8,7 +8,7 @@ public class Cat extends Animal{
     public Cat(Species specie) {
         super(specie);
         this.name = "cat";
-        this.maximumEnergy = 10;
+        this.maximumEnergy = 9999;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("bird");
         this.addToDiet("grass"); 
@@ -36,4 +36,11 @@ public class Cat extends Animal{
               this.addToDiet("buffalo");
         }     
     }
+
+    @Override
+    public void getEated(int howMuchEat){
+        
+        alive = false;
+        currentEnergy -= howMuchEat;
+    }  
 }

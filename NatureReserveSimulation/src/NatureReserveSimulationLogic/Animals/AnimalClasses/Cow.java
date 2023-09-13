@@ -8,7 +8,7 @@ public class Cow extends Animal{
     public Cow(Species specie) {
         super(specie);
         this.name = "cow";
-        this.maximumEnergy = 15;
+        this.maximumEnergy = 9999;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("grass");
         this.addToDiet("leaf");
@@ -37,5 +37,14 @@ public class Cow extends Animal{
               this.addToDiet("potato");
         }     
     }
+    
+    @Override
+    public void getEated(int howMuchEat){
+            
+        alive = false;
+        currentEnergy -= howMuchEat;
+    }
+    
+    
 
 }

@@ -22,5 +22,11 @@ public class Climbers extends Plant{
             nutritionalValue = maxNutritionalValue;
         }    
     }
+
+    @Override
+    public void getEated(int howMuchEat) {
+        
+        nutritionalValue -= howMuchEat;
+    }
     
 }

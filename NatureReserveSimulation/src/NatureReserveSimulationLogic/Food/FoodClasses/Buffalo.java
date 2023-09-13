@@ -12,5 +12,9 @@ public class Buffalo extends Food{
     public String getName() {
         return name;
     }
+
+    @Override
+    public void getEated(int howMuchEat) {     
+    }
       
 }

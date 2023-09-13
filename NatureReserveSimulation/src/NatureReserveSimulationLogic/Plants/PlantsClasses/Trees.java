@@ -23,6 +23,12 @@ public class Trees extends Plant{
         }    
     }
     
+    @Override
+    public void getEated(int howMuchEat) {
+        
+        nutritionalValue -= howMuchEat;
+    }
+    
 }
     
 

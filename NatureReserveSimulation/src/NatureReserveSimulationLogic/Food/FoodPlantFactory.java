@@ -10,17 +10,23 @@ import NatureReserveSimulationLogic.Food.FoodClasses.Meat;
 import NatureReserveSimulationLogic.Food.FoodClasses.Pork;
 import NatureReserveSimulationLogic.Food.FoodClasses.Potato;
 import NatureReserveSimulationLogic.Food.FoodClasses.Strawberry;
+import NatureReserveSimulationLogic.Plants.PlantsClasses.Climbers;
+import NatureReserveSimulationLogic.Plants.PlantsClasses.Creepers;
+import NatureReserveSimulationLogic.Plants.PlantsClasses.Herbs;
+import NatureReserveSimulationLogic.Plants.PlantsClasses.Shrubs;
+import NatureReserveSimulationLogic.Plants.PlantsClasses.Trees;
+import NatureReserveSimulationLogic.Plants.SpeciesPlants;
 import java.util.ArrayList;
 
-public class FoodFactory {
+public class FoodPlantFactory {
     
-    protected String[] foodNames = {};
+    protected String[] foodPlantNames = {};
     
-    public FoodFactory(String[] foodNames){
-        this.foodNames = foodNames;
+    public FoodPlantFactory(String[] foodPlantNames){
+        this.foodPlantNames = foodPlantNames;
     }
   
-    public Food createFood(String name){
+    public Food createPlantFood(String name){
         switch (name) {
             case "apple":
                 Apple apple = new Apple();
@@ -51,18 +57,32 @@ public class FoodFactory {
               return bird;
             case "buffalo":
                 Buffalo buffalo = new Buffalo();
-              return buffalo;   
+              return buffalo;
+            case "climbers":
+                Climbers climbers = new Climbers(SpeciesPlants.CLIMBERS);
+              return climbers;
+            case "creepers":
+                Creepers creepers = new Creepers(SpeciesPlants.CREEPERS);
+              return creepers;
+            case "herbs":
+                Herbs herbs = new Herbs(SpeciesPlants.HERBS);
+            case "shrubs":
+                Shrubs shrubs = new Shrubs(SpeciesPlants.SHRUBS);    
+              return shrubs;
+            case "trees":
+                Trees trees = new Trees(SpeciesPlants.TREES);
+              return trees;  
         }
         Apple apple = new Apple();
         return apple;
     }
     
-    public ArrayList<Food> CreateAllFoods(int nFoods){
+    public ArrayList<Food> CreateAllFoods(int nPlantsFoods){
         
         ArrayList<Food> foods = new ArrayList<>();
-        for(int i=0; i<=nFoods; i++){
-            int nRandom = (int)Math.floor(Math.random() * (foodNames.length - 1 + 1) + 0);
-            foods.add(createFood(foodNames[nRandom]));
+        for(int i=0; i<=nPlantsFoods; i++){
+            int nRandom = (int)Math.floor(Math.random() * (foodPlantNames.length - 1 + 1) + 0);
+            foods.add(createPlantFood(foodPlantNames[nRandom]));
             }
         return foods;
     }

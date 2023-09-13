@@ -16,6 +16,7 @@ public abstract class Animal extends Food{
         this.specie = specie;
         this.diet = new ArrayList<>();
         this.lifespan = 0;
+        this.alive = true;
     }
     
     public void addToDiet(String foodItem) {
@@ -26,19 +27,22 @@ public abstract class Animal extends Food{
         diet.remove(foodItem);
     }
     
-    public void Feeding(Food food){
+    public boolean Feeding(Food food){
         
         if ((isInTheDiet(food))){
             if((this.currentEnergy + food.getNutritionalValue()) <= this.maximumEnergy){
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet");
                 currentEnergy += food.getNutritionalValue();
+                return true;
             }
             System.out.println(this.specie + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
         }else{
                 System.out.println(this.specie + " have eat: " + food.getName() + ", it's NOT in his diet");
                 starvingSound();
-                currentEnergy -= food.getNutritionalValue(); 
+                currentEnergy = ((currentEnergy - food.getNutritionalValue()) > 0) ? currentEnergy -= food.getNutritionalValue() : 0; 
+                return false;
         }
+        return false;
     }  
     
     public abstract void starvingSound();
@@ -60,7 +64,7 @@ public abstract class Animal extends Food{
      
 
     public boolean isAlive() {
-        return currentEnergy >= 0;
+        return ((currentEnergy > 0) && alive == true);
     }
 
     public int getLifespan() {
@@ -74,12 +78,14 @@ public abstract class Animal extends Food{
     public void setCurrentEnergy(int currentEnergy) {
         this.currentEnergy = currentEnergy;
     }
-    
-    
+
+    public int getMaximumEnergy() {
+        return maximumEnergy;
+    }
     
     @Override
     public String toString() {
-        return ("His species it's "+this.specie+" and his current energy it's: "+this.currentEnergy);
+        return ("" + specie + ": " + currentEnergy + "/" + maximumEnergy);
     }
        
 }

@@ -8,7 +8,7 @@ public class Lion extends Animal{
     public Lion(Species specie) {
         super(specie);
         this.name = "lion";
-        this.maximumEnergy = 18;
+        this.maximumEnergy = 9999;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("cow");
         this.addToDiet("meat");
@@ -35,5 +35,12 @@ public class Lion extends Animal{
             case 30:
               this.addToDiet("strawberry");
         }     
+    }
+    
+    @Override
+    public void getEated(int howMuchEat){
+            
+        alive = false;
+        currentEnergy -= howMuchEat;
     }
 }
