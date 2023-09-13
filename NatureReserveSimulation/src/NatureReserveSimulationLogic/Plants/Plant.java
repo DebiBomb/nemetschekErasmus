@@ -5,11 +5,9 @@ import NatureReserveSimulationLogic.Food.Food;
 public abstract class Plant extends Food{
     
     protected int maxNutritionalValue;
-    protected SpeciesPlants species;
     protected int nutrientRegenValue;
     
-        public Plant(SpeciesPlants species){
-            this.species = species;
+        public Plant(){
             this.nutritionalValue = maxNutritionalValue;
         }
 

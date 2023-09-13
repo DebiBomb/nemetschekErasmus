@@ -1,14 +1,12 @@
 package NatureReserveSimulationLogic.Animals.AnimalClasses;
 
 import NatureReserveSimulationLogic.Animals.Animal;
-import NatureReserveSimulationLogic.Animals.Species;
 
 public class Lion extends Animal{
     
-    public Lion(Species specie) {
-        super(specie);
+    public Lion() {
         this.name = "lion";
-        this.maximumEnergy = 9999;
+        this.maximumEnergy = 18;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("cow");
         this.addToDiet("meat");

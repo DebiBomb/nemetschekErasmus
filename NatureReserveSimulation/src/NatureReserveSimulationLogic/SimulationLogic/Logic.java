@@ -19,7 +19,7 @@ public class Logic {
         this.animals = animals;
         this.foods = foods;
         this.setFoods = new HashSet<>(foods);
-        currentTurn = 0;
+        currentTurn = 1;
     }
  
     public void startSimulation(boolean detailedVersion) {
@@ -27,7 +27,7 @@ public class Logic {
         //I add all the animals in the foods list         
         foods.addAll(animals);
             
-        while (!allAnimalIsDead() && currentTurn < 100) {
+        while (!allAnimalIsDead() && currentTurn <= 100) {
             // prints the detailed version
             if(detailedVersion){
                 System.out.println("DAY " + currentTurn);
@@ -89,7 +89,7 @@ public class Logic {
             int lifespan = animal.getLifespan();
             if (lifespan < minLifespan) {
                 minLifespan = lifespan;
-                minLifespanPlusAnimal = (Integer.toString(minLifespan)) + " and was made by: " + (animal.getSpecie());
+                minLifespanPlusAnimal = (Integer.toString(minLifespan)) + " and was made by: " + (animal.getName());
             }
         }
         return minLifespanPlusAnimal;
@@ -102,7 +102,7 @@ public class Logic {
             int lifespan = animal.getLifespan();
             if (lifespan > maxLifespan) {
                 maxLifespan = lifespan;
-                maxLifespanPlusAnimal = (Integer.toString(maxLifespan)) + " and was made by: " + (animal.getSpecie());            }
+                maxLifespanPlusAnimal = (Integer.toString(maxLifespan)) + " and was made by: " + (animal.getName());            }
         }
         return maxLifespanPlusAnimal;
     }

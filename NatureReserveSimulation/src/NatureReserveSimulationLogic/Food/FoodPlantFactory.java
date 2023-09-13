@@ -15,7 +15,6 @@ import NatureReserveSimulationLogic.Plants.PlantsClasses.Creepers;
 import NatureReserveSimulationLogic.Plants.PlantsClasses.Herbs;
 import NatureReserveSimulationLogic.Plants.PlantsClasses.Shrubs;
 import NatureReserveSimulationLogic.Plants.PlantsClasses.Trees;
-import NatureReserveSimulationLogic.Plants.SpeciesPlants;
 import java.util.ArrayList;
 
 public class FoodPlantFactory {
@@ -59,18 +58,19 @@ public class FoodPlantFactory {
                 Buffalo buffalo = new Buffalo();
               return buffalo;
             case "climbers":
-                Climbers climbers = new Climbers(SpeciesPlants.CLIMBERS);
+                Climbers climbers = new Climbers();
               return climbers;
             case "creepers":
-                Creepers creepers = new Creepers(SpeciesPlants.CREEPERS);
+                Creepers creepers = new Creepers();
               return creepers;
             case "herbs":
-                Herbs herbs = new Herbs(SpeciesPlants.HERBS);
+                Herbs herbs = new Herbs();
+                return herbs;
             case "shrubs":
-                Shrubs shrubs = new Shrubs(SpeciesPlants.SHRUBS);    
+                Shrubs shrubs = new Shrubs();    
               return shrubs;
             case "trees":
-                Trees trees = new Trees(SpeciesPlants.TREES);
+                Trees trees = new Trees();
               return trees;  
         }
         Apple apple = new Apple();

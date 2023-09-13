@@ -1,12 +1,11 @@
 package NatureReserveSimulationLogic.Plants.PlantsClasses;
 
 import NatureReserveSimulationLogic.Plants.Plant;
-import NatureReserveSimulationLogic.Plants.SpeciesPlants;
 
 public class Creepers extends Plant{
     
-    public Creepers(SpeciesPlants species) {
-        super(species);
+    public Creepers() {
+        super();
         this.maxNutritionalValue = 9;
         this.nutritionalValue = maxNutritionalValue;
         this.name = "creepers";

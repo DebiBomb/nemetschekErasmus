@@ -1,12 +1,10 @@
 package NatureReserveSimulationLogic.Plants.PlantsClasses;
 
 import NatureReserveSimulationLogic.Plants.Plant;
-import NatureReserveSimulationLogic.Plants.SpeciesPlants;
 
 public class Trees extends Plant{
   
-    public Trees(SpeciesPlants species) {
-        super(species);
+    public Trees() {
         this.maxNutritionalValue = 12;
         this.nutritionalValue = maxNutritionalValue;
         this.name = "trees";

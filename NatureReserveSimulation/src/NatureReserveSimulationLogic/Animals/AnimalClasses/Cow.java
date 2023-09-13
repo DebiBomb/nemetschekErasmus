@@ -1,14 +1,12 @@
 package NatureReserveSimulationLogic.Animals.AnimalClasses;
 
 import NatureReserveSimulationLogic.Animals.Animal;
-import NatureReserveSimulationLogic.Animals.Species;
 
 public class Cow extends Animal{
         
-    public Cow(Species specie) {
-        super(specie);
+    public Cow() {
         this.name = "cow";
-        this.maximumEnergy = 9999;
+        this.maximumEnergy = 15;
         this.currentEnergy = maximumEnergy;
         this.addToDiet("grass");
         this.addToDiet("leaf");

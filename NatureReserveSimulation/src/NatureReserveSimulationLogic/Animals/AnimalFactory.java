@@ -17,16 +17,16 @@ public class AnimalFactory {
     public Animal createAnimal(String name){
         switch (name) {
             case "cat":
-                Cat cat = new Cat(Species.CAT);
+                Cat cat = new Cat();
               return cat;
             case "cow":
-                Cow cow = new Cow(Species.COW);
+                Cow cow = new Cow();
               return cow;
             case "dog":
-                Dog dog = new Dog(Species.DOG);
+                Dog dog = new Dog();
               return dog;
             case "lion":
-                Lion lion = new Lion(Species.LION);
+                Lion lion = new Lion();
               return lion;
         }
         return null;
