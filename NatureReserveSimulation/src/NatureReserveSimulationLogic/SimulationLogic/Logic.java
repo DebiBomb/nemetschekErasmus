@@ -1,5 +1,6 @@
 package NatureReserveSimulationLogic.SimulationLogic;
 import NatureReserveSimulationLogic.Animals.Animal;
+import NatureReserveSimulationLogic.Animals.AnimalFactory;
 import NatureReserveSimulationLogic.Food.Food;
 import NatureReserveSimulationLogic.Statistics.Statistics;
 import NatureReserveSimulationLogic.Plants.Plant;
@@ -14,11 +15,13 @@ public class Logic {
     protected ArrayList<Food> foods;
     protected int currentTurn;
     protected Set<Food> setFoods;
+    protected AnimalFactory animalFactory;
     
-    public Logic(ArrayList<Animal> animals, ArrayList<Food> foods) {
-        this.animals = animals;
+    public Logic(ArrayList<Food> foods, AnimalFactory animalFactory, int numberAnimal) {
+        this.animals = createAnimals(numberAnimal);
         this.foods = foods;
         this.setFoods = new HashSet<>(foods);
+        this.animalFactory = animalFactory;
         currentTurn = 1;
     }
  
@@ -49,7 +52,7 @@ public class Logic {
                         
                         for(Animal a : animals){
                             if(setFoods.contains(a))
-                                a.getEated(animal.getMaximumEnergy() - animal.getCurrentEnergy());
+                                a.getEated(animal.getMaximumEnergy() - animal.getCurrentEnergy()); 
                         }
                     }
                 }else{
@@ -66,6 +69,23 @@ public class Logic {
         Statistics statistics = new Statistics(nMin, nMax, nAverage);
         System.out.println("\nSTATISTICS:\n" + statistics);
     }
+    
+    public ArrayList<Animal> createAnimals(int nAnimal){
+        
+        ArrayList<Animal> animals = new ArrayList<>();
+        ArrayList<String> animalNames = new ArrayList<>(animalFactory.getAnimalsMap().keySet());
+        int nRandom = 0;
+        Random r = new Random();  
+        
+        for(int i=0; i<nAnimal; i++){     
+            nRandom = r.nextInt(animalFactory.getAnimalsMap().size()-1);
+            animals.add(animalFactory.createAnimal(animalNames.get(nRandom)));
+        }
+        
+        return animals;
+    }
+    
+    
     
     private boolean allAnimalIsDead() {
         for (Animal animal : animals) {
