@@ -18,8 +18,5 @@ public class AnimalFactory {
 
     public HashMap<String, Supplier<Animal>> getAnimalsMap() {
         return animalsMap;
-    }
-    
-    
-    
+    }    
 }        

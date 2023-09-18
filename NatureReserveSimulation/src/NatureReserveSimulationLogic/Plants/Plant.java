@@ -1,6 +1,6 @@
-package NatureReserveSimulationLogic.Plants;
+package NatureReserveSimulationLogic.Food;
 
-import NatureReserveSimulationLogic.Food.Food;
+
 
 public abstract class Plant extends Food{
     

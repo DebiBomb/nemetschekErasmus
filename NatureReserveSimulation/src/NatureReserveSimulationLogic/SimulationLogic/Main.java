@@ -3,6 +3,10 @@ package NatureReserveSimulationLogic.SimulationLogic;
 import NatureReserveSimulationLogic.Animals.Animal;
 import NatureReserveSimulationLogic.Animals.AnimalClasses.*;
 import NatureReserveSimulationLogic.Animals.AnimalFactory;
+import NatureReserveSimulationLogic.Food.Food;
+import NatureReserveSimulationLogic.Food.FoodClasses.*;
+import NatureReserveSimulationLogic.Food.FoodFactory;
+import NatureReserveSimulationLogic.Plants.PlantsClasses.*;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
@@ -17,21 +21,36 @@ public class Main {
         animalsMap.put("cow", () -> new Cow());
         animalsMap.put("dog", () -> new Dog());
         animalsMap.put("lion", () -> new Lion());
-        
-        
+               
         AnimalFactory animalFactory = new AnimalFactory(animalsMap);
               
         
-//        String[] animalsNames = {"cat", "cow", "dog", "lion"};
-//        String[] foodsNames = {"apple", "banana", "bird", "buffalo", "grass", "leaf", "meat", "pork", "potato", "strawberry", "climbers", "creepers", "herbs", "shrubs", "trees"};
-//        
-//        AnimalFactory animalFactory = new AnimalFactory(animalsNames);
-//        FoodPlantFactory foodPlantFactory = new FoodPlantFactory(foodsNames);
-//        
-//        ArrayList<Animal> animals = animalFactory.CreateAllAnimals(3);
-//        ArrayList<Food> foods = foodPlantFactory.CreateAllFoods(19);
+        HashMap<String, Supplier<Food>> foodsMap = new HashMap<>();
         
-        Logic l = new Logic(foods, animalFactory, 5);
+        // Add elements to the HashMap
+        foodsMap.put("apple", () -> new Apple());
+        foodsMap.put("banana", () -> new Banana());
+        foodsMap.put("bird", () -> new Bird());
+        foodsMap.put("buffalo", () -> new Buffalo());          
+        foodsMap.put("grass", () -> new Grass());
+        foodsMap.put("leaf", () -> new Leaf());
+        foodsMap.put("meat", () -> new Meat());
+        foodsMap.put("pork", () -> new Pork());
+        foodsMap.put("potato", () -> new Potato());
+        foodsMap.put("strawberry", () -> new Strawberry());
+        foodsMap.put("climbers", () -> new Climbers());
+        foodsMap.put("creepers", () -> new Creepers());          
+        foodsMap.put("herbs", () -> new Herbs());
+        foodsMap.put("shrubs", () -> new Shrubs());
+        foodsMap.put("trees", () -> new Trees());
+        foodsMap.put("cat", () -> new Cat());          
+        foodsMap.put("cow", () -> new Cow());
+        foodsMap.put("dog", () -> new Dog());
+        foodsMap.put("lion", () -> new Lion());
+               
+        FoodFactory foodFactory = new FoodFactory(foodsMap);
+        
+        Logic l = new Logic(foodFactory, animalFactory, 5, 20);
         l.startSimulation(true);
     }
     

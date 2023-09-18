@@ -1,6 +1,6 @@
 package NatureReserveSimulationLogic.Plants.PlantsClasses;
 
-import NatureReserveSimulationLogic.Plants.Plant;
+import NatureReserveSimulationLogic.Food.Plant;
 
 public class Climbers extends Plant{
     

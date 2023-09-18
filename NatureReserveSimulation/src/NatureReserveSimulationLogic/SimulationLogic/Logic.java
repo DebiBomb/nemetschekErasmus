@@ -2,8 +2,9 @@ package NatureReserveSimulationLogic.SimulationLogic;
 import NatureReserveSimulationLogic.Animals.Animal;
 import NatureReserveSimulationLogic.Animals.AnimalFactory;
 import NatureReserveSimulationLogic.Food.Food;
+import NatureReserveSimulationLogic.Food.FoodFactory;
 import NatureReserveSimulationLogic.Statistics.Statistics;
-import NatureReserveSimulationLogic.Plants.Plant;
+import NatureReserveSimulationLogic.Food.Plant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -16,12 +17,14 @@ public class Logic {
     protected int currentTurn;
     protected Set<Food> setFoods;
     protected AnimalFactory animalFactory;
+    protected FoodFactory foodFactory;
     
-    public Logic(ArrayList<Food> foods, AnimalFactory animalFactory, int numberAnimal) {
+    public Logic(FoodFactory foodFactory, AnimalFactory animalFactory, int numberAnimal, int numberFood) {
         this.animals = createAnimals(numberAnimal);
-        this.foods = foods;
+        this.foods = createFoods(numberFood);
         this.setFoods = new HashSet<>(foods);
         this.animalFactory = animalFactory;
+        this.foodFactory = foodFactory;
         currentTurn = 1;
     }
  
@@ -85,7 +88,20 @@ public class Logic {
         return animals;
     }
     
-    
+    public ArrayList<Food> createFoods(int nFood){
+        
+        ArrayList<Food> foods = new ArrayList<>();
+        ArrayList<String> foodNames = new ArrayList<>(foodFactory.getFoodsMap().keySet());
+        int nRandom = 0;
+        Random r = new Random();  
+        
+        for(int i=0; i<nFood; i++){     
+            nRandom = r.nextInt(foodFactory.getFoodsMap().size()-1);
+            foods.add(foodFactory.createFood(foodNames.get(nRandom)));
+        }
+        
+        return foods;
+    }
     
     private boolean allAnimalIsDead() {
         for (Animal animal : animals) {
