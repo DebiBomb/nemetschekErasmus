@@ -6,6 +6,10 @@ import NatureReserveSimulationLogic.Animals.AnimalFactory;
 import NatureReserveSimulationLogic.Food.Food;
 import NatureReserveSimulationLogic.Food.FoodClasses.*;
 import NatureReserveSimulationLogic.Food.FoodFactory;
+import NatureReserveSimulationLogic.Map.Biome;
+import NatureReserveSimulationLogic.Map.BiomeClasses.*;
+import NatureReserveSimulationLogic.Map.BiomeFactory;
+import NatureReserveSimulationLogic.Map.Map;
 import NatureReserveSimulationLogic.Plants.PlantsClasses.*;
 import java.util.HashMap;
 import java.util.function.Supplier;
@@ -49,6 +53,18 @@ public class Main {
         foodsMap.put("lion", () -> new Lion());
                
         FoodFactory foodFactory = new FoodFactory(foodsMap);
+        
+        HashMap<String, Supplier<Biome>> biomeMap = new HashMap<>();
+        
+        // Add elements to the HashMap
+        biomeMap.put("forest", () -> new Forest());
+        biomeMap.put("jungle", () -> new Jungle());
+        biomeMap.put("plains", () -> new Plains());
+               
+        BiomeFactory biomeFactory = new BiomeFactory(biomeMap);
+        
+        Map map = new Map(animalFactory, foodFactory, biomeFactory);
+        map.generateWorld();
         
         Logic l = new Logic(foodFactory, animalFactory, 5, 20);
         l.startSimulation(true);

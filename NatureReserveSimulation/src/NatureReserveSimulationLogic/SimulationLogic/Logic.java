@@ -15,17 +15,17 @@ public class Logic {
     protected ArrayList<Animal> animals;
     protected ArrayList<Food> foods;
     protected int currentTurn;
-    protected Set<Food> setFoods;
+    protected HashSet<Food> setFoods;
     protected AnimalFactory animalFactory;
     protected FoodFactory foodFactory;
     
-    public Logic(FoodFactory foodFactory, AnimalFactory animalFactory, int numberAnimal, int numberFood) {
-        this.animals = createAnimals(numberAnimal);
-        this.foods = createFoods(numberFood);
-        this.setFoods = new HashSet<>(foods);
+    public Logic(FoodFactory foodFactory, AnimalFactory animalFactory, int numberAnimal, int numberFood) {    
         this.animalFactory = animalFactory;
         this.foodFactory = foodFactory;
+        this.animals = createAnimals(numberAnimal);
+        this.foods = createFoods(numberFood);
         currentTurn = 1;
+        this.setFoods = new HashSet<>(foods);
     }
  
     public void startSimulation(boolean detailedVersion) {
@@ -71,36 +71,6 @@ public class Logic {
 
         Statistics statistics = new Statistics(nMin, nMax, nAverage);
         System.out.println("\nSTATISTICS:\n" + statistics);
-    }
-    
-    public ArrayList<Animal> createAnimals(int nAnimal){
-        
-        ArrayList<Animal> animals = new ArrayList<>();
-        ArrayList<String> animalNames = new ArrayList<>(animalFactory.getAnimalsMap().keySet());
-        int nRandom = 0;
-        Random r = new Random();  
-        
-        for(int i=0; i<nAnimal; i++){     
-            nRandom = r.nextInt(animalFactory.getAnimalsMap().size()-1);
-            animals.add(animalFactory.createAnimal(animalNames.get(nRandom)));
-        }
-        
-        return animals;
-    }
-    
-    public ArrayList<Food> createFoods(int nFood){
-        
-        ArrayList<Food> foods = new ArrayList<>();
-        ArrayList<String> foodNames = new ArrayList<>(foodFactory.getFoodsMap().keySet());
-        int nRandom = 0;
-        Random r = new Random();  
-        
-        for(int i=0; i<nFood; i++){     
-            nRandom = r.nextInt(foodFactory.getFoodsMap().size()-1);
-            foods.add(foodFactory.createFood(foodNames.get(nRandom)));
-        }
-        
-        return foods;
     }
     
     private boolean allAnimalIsDead() {
