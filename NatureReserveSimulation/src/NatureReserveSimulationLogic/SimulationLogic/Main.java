@@ -64,10 +64,10 @@ public class Main {
         BiomeFactory biomeFactory = new BiomeFactory(biomeMap);
         
         Map map = new Map(animalFactory, foodFactory, biomeFactory);
-        map.generateWorld();
+        map.generateWorld(true);
         
-        Logic l = new Logic(foodFactory, animalFactory, 5, 20);
-        l.startSimulation(true);
+//        Logic l = new Logic(map.matrix);
+//        l.startSimulation(true);
     }
     
 }

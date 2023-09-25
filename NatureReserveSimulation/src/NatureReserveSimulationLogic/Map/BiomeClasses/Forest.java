@@ -1,8 +1,10 @@
 package NatureReserveSimulationLogic.Map.BiomeClasses;
 
+import NatureReserveSimulationLogic.Food.Food;
 import NatureReserveSimulationLogic.Map.Biome;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class Forest extends Biome{
     
@@ -21,6 +23,10 @@ public class Forest extends Biome{
 
     public ArrayList<String> getSupportedFoods() {
         return supportedFoods;
+    }
+    
+    public void setSetFoods(HashSet<Food> setFoods) {
+        this.setFoods = setFoods;
     }
       
 }

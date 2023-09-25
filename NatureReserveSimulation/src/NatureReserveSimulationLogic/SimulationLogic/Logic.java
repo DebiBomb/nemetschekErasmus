@@ -8,7 +8,6 @@ import NatureReserveSimulationLogic.Food.Plant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class Logic {
     
@@ -90,12 +89,11 @@ public class Logic {
     
     private String calculateMinLifespan() {
         int minLifespan = Integer.MAX_VALUE;
-        String minLifespanPlusAnimal = "";
         for (Animal animal : animals) {
             int lifespan = animal.getLifespan();
             if (lifespan < minLifespan) {
                 minLifespan = lifespan;
-                minLifespanPlusAnimal = (Integer.toString(minLifespan)) + " and was made by: " + (animal.getName());
+                minLifespanPlusAnimal = animal.getName();
             }
         }
         return minLifespanPlusAnimal;
