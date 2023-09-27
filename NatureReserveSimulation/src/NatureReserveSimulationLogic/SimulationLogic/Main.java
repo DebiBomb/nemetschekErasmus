@@ -64,7 +64,7 @@ public class Main {
         BiomeFactory biomeFactory = new BiomeFactory(biomeMap);
         
         Map map = new Map(animalFactory, foodFactory, biomeFactory);
-        map.generateWorld(true);
+        map.StartSimulation(true);
         
 //        Logic l = new Logic(map.matrix);
 //        l.startSimulation(true);

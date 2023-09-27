@@ -43,14 +43,15 @@ public abstract class Biome {
                         }
                     }
                 }else{
-                    System.out.println(animal.getName() + " vital functions stopped");
+                    System.out.println(animal.getName() + " IS DEAD");
                 }      
            }
     }
     
     public Food takeRandomFood(){ 
         Random r = new Random();
-        int RandomIndex = r.nextInt(currentFoods.size());
+        int RandomIndex = 0;
+        RandomIndex = r.nextInt(currentFoods.size());
         return currentFoods.get(RandomIndex);
     }
     

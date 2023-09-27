@@ -23,55 +23,76 @@ public class Map {
         this.foodFactory = foodFactory;
         this.biomeFactory = biomeFactory;
         matrix = generateMatrix(3);
-        currentTurn = 1;
+        currentTurn = 0;
     }
     
-    public void generateWorld(boolean detailedVersion){
+    public void CreateEverything(){
         
         Biome currentBiome;
         
         // create everything
-        for(int i=0; i< matrix.length; i++){
+        for(int i=0; i < matrix.length; i++){
             for(int j=0; j < matrix[0].length; j++){
                 currentBiome = matrix[i][j];
-                currentBiome.currentAnimals = createAnimals(GetRandomNumber(5), matrix[i][j]);
-                currentBiome.currentFoods = createFoods(GetRandomNumber(25), matrix[i][j]);
+                currentBiome.currentAnimals = createAnimals(3, currentBiome);
+                currentBiome.currentFoods = createFoods(20, currentBiome);
                 currentBiome.setSetFoods(new HashSet<>(currentBiome.getCurrentFoods()));
             }
         }
+    }
+    
+    public void printMatrix(){
+        System.out.println("MY MATRIX: \n");
         
-        // start of the simulation
+        for(int i=0; i < matrix.length; i++){
+            for(int j=0; j < matrix[0].length; j++){
+                System.out.print(matrix[i][j].toString() + "  ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+    }
+    
+    
+    public void StartSimulation(boolean detailedVersion){
+        
+        CreateEverything();
+        
+        printMatrix();
+        
+        Biome currentBiome;
         
         // just the method for stop all        
         while(!StopSimulation() && currentTurn <= 100 ){
             
+            currentTurn ++;
+            System.out.println("DAY " + currentTurn);
             
-            System.out.println("Turn---------------------------" + currentTurn);          
-            currentTurn++;
-            
-        for(int i=0; i< matrix.length; i++){
-            for(int j=0; j < matrix[0].length; j++){
-                
-                // get the current biom from the matrix
-                currentBiome = matrix[i][j];
-                
-                // prints the detailed version
-                if(detailedVersion){
-                    System.out.println("DAY " + currentTurn);
-                    System.out.println(currentBiome.toString());
-                    for(Animal animal : currentBiome.currentAnimals){
-                        System.out.println(animal.toString());
+            for(int i=0; i < matrix.length; i++){
+                for(int j=0; j < matrix[0].length; j++){
+
+                    // get the current biom from the matrix
+                    currentBiome = matrix[i][j];
+
+                    // prints the detailed version
+                    if(detailedVersion){
+                        System.out.println("<---------" + currentBiome.toString() + "-------->");
+                        System.out.println("<<<ANIAMAL STATS PART>>>");
+                        for(Animal animal : currentBiome.currentAnimals){
+                            System.out.println(animal.toString());
+                        }
                     }
+
+                    // restore all the plants
+                    currentBiome.allPlantsRegenNutrional();
+
+                    // feeding all the animals
+                    System.out.println("<<<ANIAMAL FEEDING PART>>>");
+                    currentBiome.Feeding();
+
                 }
-                
-                // restore all the plants
-                currentBiome.allPlantsRegenNutrional();
-                
-                // feeding all the animals from the biome
-                currentBiome.Feeding();
-                
             }
-        }
         }
         
         // Calculate statistics
@@ -112,38 +133,37 @@ public class Map {
         return biome;
     }
     
-    public ArrayList<Animal> createAnimals(int randomNumber, Biome biome){
+    public ArrayList<Animal> createAnimals(int number, Biome biome){
         
         ArrayList<Animal> animals = new ArrayList<>();
         ArrayList<String> animalNames = new ArrayList(biome.getSupportedAnimals()); 
         
-        for(int i=0; i<randomNumber; i++){     
+        for(int i=0; i<number; i++){     
             animals.add(animalFactory.createAnimal(animalNames.get(GetRandomNumber(biome.getSupportedAnimals().size()))));
         }       
         return animals;
     }
     
-    public ArrayList<Food> createFoods(int randomNumber, Biome biome){
+    public ArrayList<Food> createFoods(int number, Biome biome){
         
         ArrayList<Food> foods = new ArrayList<>();
         ArrayList<String> foodNames = new ArrayList<>(biome.getSupportedFoods());
         
-        for(int i=0; i<randomNumber; i++){
+        for(int i=0; i<number; i++){
             foods.add(foodFactory.createFood(foodNames.get(GetRandomNumber(biome.getSupportedFoods().size()))));
         }
         return foods;
     }
     
-    public int GetRandomNumber(int range){
-        int nRandom = 0;
+    public int GetRandomNumber(int range){ 
         Random random = new Random();
-        return random.nextInt(range);        
+        return random.nextInt(range);      
     }
     
     public boolean StopSimulation(){
         for(int i=0; i< matrix.length; i++){
             for(int j=0; j < matrix[0].length; j++){
-                if(!matrix[i][j].isAllDead())
+                if(!(matrix[i][j].isAllDead()))
                     return false;
             }
         }
