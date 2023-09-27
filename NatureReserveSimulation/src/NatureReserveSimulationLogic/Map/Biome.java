@@ -61,7 +61,7 @@ public abstract class Biome {
             int lifespan = animal.getLifespan();
             if (lifespan < minLifespan){
                 minLifespan = lifespan;
-                animalMaxLifespan = animal.getName();
+                animalMinLifespan = animal.getName();
             }
         }
         return minLifespan;
@@ -86,7 +86,9 @@ public abstract class Biome {
         for (Animal animal : currentAnimals) {
             totalLifespan += animal.getLifespan();
         }
-        realTotalLifespan = totalLifespan / currentAnimals.size();
+        if(currentAnimals.size() > 0)
+            realTotalLifespan = totalLifespan / currentAnimals.size();
+        
         return realTotalLifespan;
     }
     

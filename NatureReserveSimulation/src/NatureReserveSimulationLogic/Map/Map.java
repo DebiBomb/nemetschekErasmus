@@ -7,6 +7,7 @@ import NatureReserveSimulationLogic.Food.FoodFactory;
 import NatureReserveSimulationLogic.Statistics.Statistics;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Map {
@@ -67,7 +68,7 @@ public class Map {
         while(!StopSimulation() && currentTurn <= 100 ){
             
             currentTurn ++;
-            System.out.println("DAY " + currentTurn);
+            System.out.println("[-----------" + "DAY " + currentTurn + "-----------]");
             
             for(int i=0; i < matrix.length; i++){
                 for(int j=0; j < matrix[0].length; j++){
@@ -83,7 +84,10 @@ public class Map {
                             System.out.println(animal.toString());
                         }
                     }
-
+                    
+                    // movement of the animal
+                    AnimalMovements(currentBiome);
+                    
                     // restore all the plants
                     currentBiome.allPlantsRegenNutrional();
 
@@ -153,6 +157,52 @@ public class Map {
             foods.add(foodFactory.createFood(foodNames.get(GetRandomNumber(biome.getSupportedFoods().size()))));
         }
         return foods;
+    }
+    
+    public ArrayList<Biome> nearBiomes(Biome biome){
+        ArrayList<Biome> nearBiomes = new ArrayList<>();
+        
+        if(biome.x > 0)
+            nearBiomes.add(matrix[biome.x-1][biome.y]);
+        
+        if(biome.x < (matrix.length - 1))
+            nearBiomes.add(matrix[biome.x+1][biome.y]);
+        
+        if(biome.y > 0)
+            nearBiomes.add(matrix[biome.x][biome.y-1]);
+        
+        if(biome.y < (matrix[0].length - 1))
+            nearBiomes.add(matrix[biome.x][biome.y+1]);
+        
+        return nearBiomes;
+    }
+    
+    public void AnimalMovements(Biome biome){
+//        for(Animal animal : biome.currentAnimals){
+//            ArrayList<Biome> accesibleBiomes = new ArrayList<>(animal.WereCanMove(nearBiomes(biome)));
+//
+//            int randomNumber = GetRandomNumber(accesibleBiomes.size());
+//            Biome newBiome = accesibleBiomes.get(randomNumber);
+//
+//            newBiome.currentAnimals.add(animal);
+//            biome.currentAnimals.remove(animal);
+//        }
+        
+        Iterator<Animal> iterator = biome.currentAnimals.iterator();
+
+        while (iterator.hasNext()) {
+            Animal animal = iterator.next();
+            
+            ArrayList<Biome> accesibleBiomes = new ArrayList<>(animal.WereCanMove(nearBiomes(biome)));
+            if(accesibleBiomes.size() > 0){
+                int randomNumber = GetRandomNumber(accesibleBiomes.size());
+                Biome newBiome = accesibleBiomes.get(randomNumber);
+
+
+                newBiome.currentAnimals.add(animal); // Aggiunge l'elemento a lista2
+                iterator.remove(); // Rimuove l'elemento da lista1
+            }
+        }
     }
     
     public int GetRandomNumber(int range){ 

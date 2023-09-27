@@ -1,9 +1,10 @@
 package NatureReserveSimulationLogic.Animals;
 import NatureReserveSimulationLogic.Food.Food;
+import NatureReserveSimulationLogic.Map.Biome;
 import java.util.ArrayList;
 
 public abstract class Animal extends Food{
-
+      
     protected int currentEnergy;
     protected int maximumEnergy;
     private ArrayList<String> diet;
@@ -23,6 +24,17 @@ public abstract class Animal extends Food{
     
     public void removeFromDiet(String foodItem) {
         diet.remove(foodItem);
+    }
+    
+    public ArrayList<Biome> WereCanMove(ArrayList<Biome> nearBiomes){
+        ArrayList<Biome> accesibleBiomes = new ArrayList<>();
+        for(Biome biome : nearBiomes){
+            if(biome.getSupportedAnimals().contains(this.name)){
+                accesibleBiomes.add(biome);
+            }
+        }
+        
+        return accesibleBiomes;
     }
     
     public boolean Feeding(Food food){
