@@ -13,7 +13,7 @@ public class Forest extends Biome{
     
     public Forest(){
         this.name = "Forest";
-        supportedAnimals = new ArrayList<>(Arrays.asList("cow", "dog"));
+        supportedAnimals = new ArrayList<>(Arrays.asList("cow", "dog", "cat"));
         supportedFoods = new ArrayList<>(Arrays.asList("meat", "pork", "strawberry", "creepers", "trees"));
     }
 

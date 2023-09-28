@@ -58,6 +58,8 @@ public class Map {
     
     public void StartSimulation(boolean detailedVersion){
         
+        System.out.println("START OF THE SIMULATION...\n");
+        
         CreateEverything();
         
         printMatrix();
@@ -69,6 +71,7 @@ public class Map {
             
             currentTurn ++;
             System.out.println("[-----------" + "DAY " + currentTurn + "-----------]");
+            resetAllHaveEat();
             
             for(int i=0; i < matrix.length; i++){
                 for(int j=0; j < matrix[0].length; j++){
@@ -79,21 +82,22 @@ public class Map {
                     // prints the detailed version
                     if(detailedVersion){
                         System.out.println("<---------" + currentBiome.toString() + "-------->");
-                        System.out.println("<<<ANIAMAL STATS PART>>>");
+                        System.out.println("<<<ANIMAL STATS>>>");
                         for(Animal animal : currentBiome.currentAnimals){
                             System.out.println(animal.toString());
                         }
                     }
                     
-                    // movement of the animal
-                    AnimalMovements(currentBiome);
+                    // feeding all the animals
+                    System.out.println("<<<ANIMAL FEEDING>>>");
+                    currentBiome.Feeding();
                     
                     // restore all the plants
                     currentBiome.allPlantsRegenNutrional();
-
-                    // feeding all the animals
-                    System.out.println("<<<ANIAMAL FEEDING PART>>>");
-                    currentBiome.Feeding();
+                    
+                    // movement of the animal
+                    AnimalMovements(currentBiome);
+                    
 
                 }
             }
@@ -205,6 +209,16 @@ public class Map {
         }
     }
     
+    public void resetAllHaveEat(){
+
+        for(int i=0; i < matrix.length; i++){
+            for(int j=0; j < matrix[0].length; j++){
+                 matrix[i][j].ResetHaveEat();
+            }
+        }
+        
+    }
+    
     public int GetRandomNumber(int range){ 
         Random random = new Random();
         return random.nextInt(range);      
@@ -237,13 +251,13 @@ public class Map {
     }
 
     private String calculateAllMaxLifespan() {
-        int maxLifespan = Integer.MAX_VALUE;
+        int maxLifespan = Integer.MIN_VALUE;
         String maxLifespanString = "";
 
         for(int i=0; i< matrix.length; i++){
             for(int j=0; j < matrix[0].length; j++){
                 int lifespan = matrix[i][j].calculateMaxLifespan();
-                if (lifespan < maxLifespan){
+                if (lifespan > maxLifespan){
                     maxLifespan = lifespan;
                     maxLifespanString = (Integer.toString(maxLifespan)) + " and was made by: " + matrix[i][j].animalMaxLifespan;
                 }    

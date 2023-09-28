@@ -28,13 +28,22 @@ public abstract class Biome {
         return true;
     }
     
+    public void ResetHaveEat(){
+        for(Animal animal : currentAnimals){    
+            animal.setHaveEat(false);
+        }       
+    }
+    
     public void Feeding(){
         for (Animal animal : currentAnimals) {
                 
+            if(!animal.isHaveEat()){
+            
                 if (animal.isAlive()){
+                    
                     animal.increaseLifespan();
                     Food food = takeRandomFood();
-                    if(animal.Feeding(food)){
+                    if(animal.Feeding(food)){ 
                         food.getEated(animal.getMaximumEnergy() - animal.getCurrentEnergy());
                         
                         for(Animal a : currentAnimals){
@@ -42,10 +51,12 @@ public abstract class Biome {
                                 a.getEated(animal.getMaximumEnergy() - animal.getCurrentEnergy()); 
                         }
                     }
+                    
                 }else{
                     System.out.println(animal.getName() + " IS DEAD");
                 }      
            }
+        }
     }
     
     public Food takeRandomFood(){ 
@@ -68,7 +79,7 @@ public abstract class Biome {
     }
 
     public int calculateMaxLifespan() {
-        int maxLifespan = 0;
+        int maxLifespan = Integer.MIN_VALUE;
         for (Animal animal : currentAnimals) {
             int lifespan = animal.getLifespan();
             if (lifespan > maxLifespan){

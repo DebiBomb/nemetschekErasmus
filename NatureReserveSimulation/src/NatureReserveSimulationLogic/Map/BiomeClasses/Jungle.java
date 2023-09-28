@@ -13,7 +13,7 @@ public class Jungle extends Biome{
     
     public Jungle(){
         this.name = "Jungle";
-        supportedAnimals = new ArrayList<>(Arrays.asList("cat", "lion"));
+        supportedAnimals = new ArrayList<>(Arrays.asList("cat", "lion", "dog"));
         supportedFoods = new ArrayList<>(Arrays.asList("banana", "leaf", "strawberry", "climbers", "trees"));     
     }
    

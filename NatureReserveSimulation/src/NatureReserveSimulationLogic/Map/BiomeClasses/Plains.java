@@ -16,7 +16,7 @@ public class Plains extends Biome {
     
     public Plains(){
         this.name = "Plains";
-        supportedAnimals = new ArrayList<>(Arrays.asList("cat", "dog", "cow"));
+        supportedAnimals = new ArrayList<>(Arrays.asList("cat", "dog", "cow", "lion"));
         supportedFoods = new ArrayList<>(Arrays.asList("apple", "leaf", "bird", "buffalo", "herbs","shrubs"));
     }
 

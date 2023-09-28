@@ -10,12 +10,14 @@ public abstract class Animal extends Food{
     private ArrayList<String> diet;
     protected int lifespan;
     protected boolean alive;
+    protected boolean haveEat;
     
     public Animal(){
         this.currentEnergy = maximumEnergy;
         this.diet = new ArrayList<>();
         this.lifespan = 0;
         this.alive = true;
+        this.haveEat = false;
     }
     
     public void addToDiet(String foodItem) {
@@ -39,21 +41,24 @@ public abstract class Animal extends Food{
     
     public boolean Feeding(Food food){
         
-        if ((isInTheDiet(food))){
-            if((this.currentEnergy + food.getNutritionalValue()) <= this.maximumEnergy){
-                System.out.println(this.getName() + " have eat: " + food.getName() + ", it's in his diet");
-                currentEnergy += food.getNutritionalValue();
-                return true;
+            this.haveEat = true;
+        
+            if ((isInTheDiet(food))){
+                if((this.currentEnergy + food.getNutritionalValue()) <= this.maximumEnergy){
+                    System.out.println(this.getName() + " have eat: " + food.getName() + ", it's in his diet");
+                    currentEnergy += food.getNutritionalValue();
+                    return true;
+                }
+                System.out.println(this.getName() + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
+            }else{
+                    System.out.println(this.getName() + " have eat: " + food.getName() + ", it's NOT in his diet");
+                    starvingSound();
+                    currentEnergy = ((currentEnergy - food.getNutritionalValue()) > 0) ? currentEnergy -= food.getNutritionalValue() : 0; 
+                    return false;
             }
-            System.out.println(this.getName() + " have eat: " + food.getName() + ", it's in his diet, but it's FULL of energy"); 
-        }else{
-                System.out.println(this.getName() + " have eat: " + food.getName() + ", it's NOT in his diet");
-                starvingSound();
-                currentEnergy = ((currentEnergy - food.getNutritionalValue()) > 0) ? currentEnergy -= food.getNutritionalValue() : 0; 
-                return false;
-        }
         return false;
     }  
+
     
     public abstract void starvingSound();
     
@@ -86,6 +91,14 @@ public abstract class Animal extends Food{
 
     public int getMaximumEnergy() {
         return maximumEnergy;
+    }
+
+    public void setHaveEat(boolean haveEat) {
+        this.haveEat = haveEat;
+    }
+
+    public boolean isHaveEat() {
+        return haveEat;
     }
     
     @Override
